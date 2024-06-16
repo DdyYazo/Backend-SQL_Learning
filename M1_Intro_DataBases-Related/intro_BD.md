@@ -19,7 +19,7 @@
   - [2.2. *`Resumen de las cardinalidades`*](#22-resumen-de-las-cardinalidades)
   - [](#)
 - [3. `Diagrama entidad relación (DER)`](#3-diagrama-entidad-relación-der)
-    - [\_Diagrama entidad relación de platziblog](#_diagrama-entidad-relación-de-platziblog)
+  - [\_Diagrama entidad relación de platziblog *(Primera página)*](#_diagrama-entidad-relación-de-platziblog-primera-página)
 - [4. `Tipos de datos y constraints`](#4-tipos-de-datos-y-constraints)
   - [4.1. `Tipos de datos`](#41-tipos-de-datos)
     - [1. **Datos de tipo `Texto`**](#1-datos-de-tipo-texto)
@@ -30,8 +30,10 @@
 - [5. `Normalización de bases de datos`](#5-normalización-de-bases-de-datos)
     - [5.1. `Dependencias en la normalización`](#51-dependencias-en-la-normalización)
   - [5.2. `Formas de normalización`](#52-formas-de-normalización)
-    - [- Ejemplo aplicando las Formas de normalización\`](#--ejemplo-aplicando-las-formas-de-normalización)
+    - [- Ejemplo aplicando las Formas de normalización](#--ejemplo-aplicando-las-formas-de-normalización)
     - [- Video de guia para entender un poco mas a detalle la Normalización de bases de datos](#--video-de-guia-para-entender-un-poco-mas-a-detalle-la-normalización-de-bases-de-datos)
+- [6. `Diagrama Fisico`](#6-diagrama-fisico)
+    - [\_Diagrama fisico de platziblog *(segunda página)*](#_diagrama-fisico-de-platziblog-segunda-página)
 
 # 1. `¿Qué son entidades y atributos?`
 
@@ -99,12 +101,17 @@ Las relaciones tienen una propiedad llamada **`cardinalidad`** y tiene que ver c
 | **Uno a mucho `(0:N)` u `opcional`** | Un registro de una tabla se relaciona con varios registros de otra tabla, pero no todos los registros de la tabla 1 tienen una relación con la tabla 2. |
 | **Muchos a muchos `(N:M)`** | Varios registros de una tabla se relacionan con varios registros de otra tabla. |
 
+<div align="center">
+
 ### - Imagenes de las cardinalidades
+
 |  |  |
 | --- | --- |
 | <img aling="center" src="https://i.postimg.cc/BvdNwQtq/imagen-2024-06-14-183325235.png" width="250px"> | <img aling="center" src="https://i.postimg.cc/L4VBjVk4/imagen-2024-06-14-184213240.png" width="250px"> |
 | <img aling="center" src="https://i.postimg.cc/28cQK8XP/imagen-2024-06-14-184402470.png" width="250px">  | <img aling="center" src="https://i.postimg.cc/Lsfj5k6p/imagen-2024-06-14-184422309.png" width="250px">  |
 | <img aling="center" src="https://i.postimg.cc/BvdNwQtq/imagen-2024-06-14-183325235.png" width="250px">  |  |
+
+</div>
 
 > [!NOTE]
 >	
@@ -116,7 +123,6 @@ Las relaciones tienen una propiedad llamada **`cardinalidad`** y tiene que ver c
 <p align="center">
   <span align="center"><strong>Cardinalidad N:M</strong></span>
 </p>
-
 
 ## 2.2. *`Resumen de las cardinalidades`*
  
@@ -133,7 +139,7 @@ Las relaciones tienen una propiedad llamada **`cardinalidad`** y tiene que ver c
 
 **El diagrama entidad relación es una herramienta que nos permite representar las entidades, atributos y relaciones de una base de datos**. Es una representación gráfica de la estructura de una base de datos y esta relacionado estrechamente con lo que se mencionó anteriormente.
 
-### _[Diagrama entidad relación](./platziBlog_Models.drawio) de platziblog
+## _[Diagrama entidad relación](./platziBlog_Models.drawio) de platziblog *(Primera página)*
 
 --- 
 
@@ -231,7 +237,7 @@ Es importante tener en cuenta dos conceptos clave en la normalización de bases 
 | **Tercera forma normal (3FN)** | **Cumple 1FN, 2FN y los campos que no son clave no deben tener dependencias (eliminar los atributos multivaluados).** <br> Sí un dato de un atributo esta directamente relacionado con otro, para que al editar un dato, no deba editar otro campo y haya espacio a errores (porque alguno “se me olvidó”), se separa en una tabla diferente de esta manera la actualización de los datos es más limpia. |
 | **Cuarta forma normal (4FN)** | **Cumple 1FN, 2FN, 3FN y los campos multivaluados se identifican por una clave única.** <br> Esta es usualmente útil cuándo se tiene una cardinalidad N:M, de muchos a muchos, y simplemente se crea una tabla especial para relacionar las claves únicas de las entidades.|
 
-### - Ejemplo aplicando las Formas de normalización` 
+### - Ejemplo aplicando las Formas de normalización
 
 En la siguiente tabla, se puede ver un campo repetido que en este caso corresponde a **materia**, al ser el campo `materia_1` y `materia_2` repetidos, cumplen la misma naturaleza.
 
@@ -280,3 +286,16 @@ En este caso es diferente, a cada **alumno** le corresponde un único `nivel` y 
 </p>
 
 ### - Video de guia para entender un poco mas a detalle la [Normalización de bases de datos](https://youtu.be/m7kpSO6kqY8)
+
+
+# 6. `Diagrama Fisico`
+
+El diagrama físico es una representación de la estructura de la base de datos en un motor de base de datos específico. En este diagrama se definen los tipos de datos y constraints que se utilizarán en la base de datos.
+
+### _[Diagrama fisico](./platziBlog_Models.drawio) de platziblog *(segunda página)*
+
+> [!NOTE]
+>
+> - **Al normalizar** aunque parezca que la información se multiplicó, en realidad la **descompusimos de manera que a un sistema le sea fácil de reconocer y mantener la consistencia de los datos.**
+>
+> - Algunos autores precisan **una 5FN que hace referencia a que después de realizar esta normalización a través de uniones (JOIN) permita regresar a la data original de la cual partió.**

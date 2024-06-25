@@ -31,9 +31,11 @@
 - [4. **¿Qué tan Standard es SQL?**](#4-qué-tan-standard-es-sql)
   - [4.1. **`_Ejemplo`**](#41-_ejemplo)
 - [5. **Creando Tablas**](#5-creando-tablas)
-  - [5.1 **`Tablas independientes`**](#51-tablas-independientes)
-    - [5.1.1 *\_Revisar las consultas en el script platziblog.sql para ver las consultas de creación de **tablas independientes.***](#511-_revisar-las-consultas-en-el-script-platziblogsql-para-ver-las-consultas-de-creación-de-tablas-independientes)
-  - [5.1 **`Tablas dependientes`**](#51-tablas-dependientes)
+  - [5.1. **`TABLAS INDEPENDIENTES (SIN FOREIGN KEYS)`**](#51-tablas-independientes-sin-foreign-keys)
+  - [5.2. **`TABLAS DEPENDIENTES (CON FOREIGN KEYS)`**](#52-tablas-dependientes-con-foreign-keys)
+    - [5.2.1. *`FOREIGN KEY OPTIONS`*](#521-foreign-key-options)
+  - [5.3. **`TABLAS TRANSITIVAS (MUCHOS A MUCHOS)`**](#53-tablas-transitivas-muchos-a-muchos)
+  - [**\_Revisar las consultas en el script *platziblog.sql* para ver las consultas de creación de las tablas**](#_revisar-las-consultas-en-el-script-platziblogsql-para-ver-las-consultas-de-creación-de-las-tablas)
 
 # 1. **Sublenguajes de SQL**
 
@@ -43,12 +45,15 @@ Es improtante comprender que dentro del SQL como lenguaje de domio específico p
   <img src="https://i.postimg.cc/zBMS37WJ/imagen-2024-06-18-203017980.png" alt="Aquí va el texto del enlace" width="450">
 </p>
 <p align="center">
-  <span><strong>Sublenguajes de SQL</strong></span>
+  <strong>Sublenguajes de SQL</strong>
 </p>
 
 # 2. **DDL (Data Definition Language)**
 
 Permite crear y modificar la estructura de una base de datos. Posee los siguientes comandos:
+
+<div align="center">
+
 
 | Comando | Descripción |
 | ------- | ----------- |
@@ -58,6 +63,8 @@ Permite crear y modificar la estructura de una base de datos. Posee los siguient
 | **`TRUNCATE`** | Permite eliminar todos los registros de una tabla |
 | **`COMMENT`** | Permite agregar comentarios a una tabla |
 | **`RENAME`** | Permite renombrar una tabla |
+
+</div>
 
 ## 2.1. **`Objetos de DDL`**
 
@@ -219,12 +226,17 @@ Permite:
 - **Elimina**r
 - **Insertar** y **Actualizar** datos de una base de datos. Posee los siguientes comandos:
 
+<div align="center">
+
+
 | Comando | Descripción |
 | ------- | ----------- |
 | **`SELECT`** | Permite consultar datos de una tabla que satisfagan un criterio determinado. |
 | **`INSERT`** | Permite insertar datos en una unica operación dentro de una tabla |
 | **`UPDATE`** | Permite modificar los valores de los campos específicos de una tabla |
 | **`DELETE`** | Permite eliminar datos de una tabla |
+
+</div>
 
 ## 2.1. **`DML "SELECT"`**
 
@@ -332,20 +344,30 @@ DELETE FROM database.people;
 
 Permite crear roles, permisos e integridad referencial, así como el control al acceso a la base de datos.
 
+
+<div align="center">
+
 | Comando | Descripción |
 | ------- | ----------- |
 | **`GRANT`** | Permite otorgar permisos a los usuarios |
 | **`REVOKE`** | Permite revocar permisos a los usuarios |
 
+</div>
+
 ## 3.2. **`TCL`**
 
 Permite administrar diferentes transacciones que ocurren dentro de una base de datos.
+
+<div align="center">
+
 
 | Comando | Descripción |
 | ------- | ----------- |
 | **`COMMIT`** | Permite confirmar una transacción |
 | **`ROLLBACK`** | Permite deshacer una transacción |
 | **`SAVEPOINT`** | Permite establecer un punto de guardado en una transacción |
+
+</div>
 
 # 4. **¿Qué tan Standard es SQL?**
 
@@ -363,15 +385,82 @@ La utilidad más grande de **SQL** fue unificar la forma en la que pensamos y ha
 
 # 5. **Creando Tablas**
 
-## 5.1 **`Tablas independientes`**
+## 5.1. **`TABLAS INDEPENDIENTES (SIN FOREIGN KEYS)`**
 
 Se empieza a plasmar la **BD de Platziblog** segun el **Diagrama Físico**. 
 
 > [!TIP]
 > 
-> **Una buena práctica es comenzar creando las entidades que no tienen una `llave foránea`**. A estas tablas se les denomina, **tablas independientes**. Generalmente **en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.**
+> **Una buena práctica es comenzar creando las entidades que no tienen una `llave foránea`**. A estas tablas se les denomina, ***tablas independientes***. Generalmente **en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.**
 
-### 5.1.1 *_Revisar las consultas en el script [platziblog.sql](./sql/platziblog.sql) para ver las consultas de creación de **tablas independientes.***
+## 5.2. **`TABLAS DEPENDIENTES (CON FOREIGN KEYS)`**
 
-## 5.1 **`Tablas dependientes`**
+A diferencia de las **tablas independientes**, las **tablas dependientes** son aquellas que tienen una `llave foránea` que las relaciona con otra tabla.
 
+- **Ejemplo**
+
+```sql
+  CREATE TABLE posts (
+    id INT NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(150) NOT NULL,
+    fecha_publicacion TIMESTAMP ,
+    contenido TEXT NOT NULL,
+    status CHAR(8) DEFAULT 'activo',
+    user_id INT NOT NULL,
+    categoria_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+```
+### 5.2.1. *`FOREIGN KEY OPTIONS`*
+
+<img align="right" width="200px" src="https://i.postimg.cc/kXbBKrdz/imagen-2024-06-25-131531287.png" style="margin-left: 20px" >
+
+- **`ON UPDATE`:** Significa que si se actualiza un usuario, se actualiza el post asociado a ese usuario.
+
+- **`ON DELETE`:** Significa que si se elimina un usuario, se elimina el post asociado a ese usuario.
+romperá la relación.
+<br>
+<br>
+
+<div align="center">
+
+| Valores | Descripción |
+| ------- | ----------- |
+| **`CASCADE`** | Si se actualiza/elimina un registro de la tabla padre (usuarios), se actualizan/eliminan los registros de la tabla hija (todos los post relacionados). |
+| **`RESTRICT`** | No se permite actualizar/eliminar un registro de la tabla padre (usuarios) si hay registros relacionados en la tabla hija (post relacionados)
+| **`SET NULL`** | Si se actualiza/elimina un registro de la tabla padre (usuarios), se establece el valor de la columna de la tabla hija (posts relacionados) en `NULL`. |
+| **`NO ACTION`** | No hara nada si se actualiza/elimina un registro de la tabla padre (usuarios). |
+
+</div>
+
+## 5.3. **`TABLAS TRANSITIVAS (MUCHOS A MUCHOS)`**
+
+Las tablas transitivas sirven como puente para unir dos tablas. No tienen contenido semántico. 
+
+- **Ejemplo**
+
+```sql
+CREATE TABLE post_etiqueta (
+    id_post_etiqueta INT NOT NULL AUTO_INCREMENT,s
+    post_id INT NOT NULL,
+    etiqueta_id INT NOT NULL,
+    PRIMARY KEY (id_post_etiqueta),
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    FOREIGN KEY (etiqueta_id) REFERENCES etiquetas(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+```
+
+> [!IMPORTANT]
+> 
+> Dentro de los clientes graficos como **Workbench** existe una opición llamada **Reverse Engineer** en la pestaña de **`Database`** la cual, nos reproduce **el esquema** del cual nos basamos para crear nuestras tablas. **Es útil cuando llegas a un nuevo trabajo y quieres entender cuál fue la mentalidad que tuvieron al momento de crear las bases de datos**.
+
+<p align="center">
+  <img src="https://i.postimg.cc/6QCYb6GZ/imagen-2024-06-25-145112176.png" alt="Aquí va el texto del enlace" width="400">
+</p>
+<p align="center">
+  <strong>Esquema grafico de Reverse Enginner de la base de datos Platziblog</strong>
+</p>
+
+## **_Revisar las consultas en el script *[platziblog.sql](./sql/platziblog.sql)* para ver las consultas de creación de las tablas**

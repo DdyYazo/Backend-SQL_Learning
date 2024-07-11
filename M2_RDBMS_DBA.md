@@ -2,6 +2,10 @@
 
 # **RDBMS (MySQL)**
 
+<p align="center">
+  <img src="https://i.postimg.cc/PrYc2xrb/image-6.png" alt="Aquí va el texto del enlace" width="500">
+</p>
+
 </div>
 
 # **Tabla de contenido**

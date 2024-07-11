@@ -2,6 +2,10 @@
 
 # **Introducción a las bases de datos relacionales**
 
+<p align="center">
+  <img src="https://i.postimg.cc/gjfD3vZ9/imagen-2024-07-01-163629575.png" alt="Aquí va el texto del enlace" width="500">
+</p>
+
 </div>
 
 # **Tabla de contenido**

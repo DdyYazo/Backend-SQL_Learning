@@ -7,26 +7,16 @@
   <img src="https://i.postimg.cc/C5QKL7dr/imagen-2024-06-02-162204992-transformed.png" alt="imagen-2024-03-07-211141241" width="500"/>
 </a>
 
-**A compilation of relational databases**
+<p><strong>En esta rama se abordarán los fundamentos de las bases de datos relacionales, RBDMS y MySQL, así como una aplicación practicas de sublenaguajes de SQL y posteriormente una breve intro a las bases de datos no relacionales.</strong></p>
 
-![Static Badge](https://img.shields.io/badge/First_Module-Introduction%20Relational%20BD-red)
-![Static Badge](https://img.shields.io/badge/Second_Module-RDBMS%20(MySQL)-98c510)
-![Static Badge](https://img.shields.io/badge/Third_Module-SQL%20in%20depth-30bd9f)
-![Static Badge](https://img.shields.io/badge/Third_Module-Queries%20to%20a%20database-41d667)
-![Static Badge](https://img.shields.io/badge/Fifth_Module-NON%20relational%20BD-882fd8)
-![Static Badge](https://img.shields.io/badge/Sixth%20Module-NON%20relational%20BD%20Models-d2824e)
-![Static Badge](https://img.shields.io/badge/Seventh%20Module-Databases%20in%20real%20life-blue)
+## `Contenido de los modulos`
 
 | Module | Description |
 |--------|-------------|
-| *First Module*: **[Introduction to Relational Databases](./Mod_1-intro-RBD/intro_BD.md)** | Este módulo proporciona una introducción a las bases de datos relacionales y cómo se utilizan en el mundo real. Aprenderás sobre los conceptos básicos de las bases de datos relacionales y cómo se comparan con otros tipos de bases de datos. |
-| *Second Module*: **[RDBMS (MySQL)](./Mod_2-RDBMS/intro_BD.md)** | En este módulo, aprenderás sobre los sistemas de gestión de bases de datos relacionales (RDBMS) y cómo utilizar MySQL, uno de los RDBMS más populares. Aprenderás cómo instalar y configurar MySQL, así como cómo crear y gestionar bases de datos y tablas. |
-| *Third Module*: **[User Control and File Access](./Mod_3-userAdminis_fileAc.md)** | En este módulo, aprenderás sobre la administración de usuarios en Linux y cómo controlar el acceso a los archivos. Esto incluye la creación y gestión de usuarios, así como la configuración de permisos de archivos. |
-| *Fourth Module*: **[Monitoring and Services](./Mod_4-monitoring_servic.md)** | Este módulo cubre cómo monitorear los recursos del sistema y administrar servicios en Linux. Aprenderás cómo utilizar herramientas de monitoreo y cómo iniciar, detener y configurar servicios. |
-| *Fifth Module*: **[Networks and Security](./Mod_5-networs_secur.md)** | En este módulo, aprenderás sobre la configuración de redes y la seguridad en Linux. Esto incluye la configuración de interfaces de red, firewalls y la gestión de certificados de seguridad. |
-| *Sixth Module*: **[Software Management and Analysis](./Mod_6-softManage_analys.md)** | Este módulo se centra en la gestión de software en Linux y cómo analizar el rendimiento del sistema. Aprenderás cómo instalar y actualizar software, así como cómo utilizar herramientas de análisis de rendimiento. |
-| *Seventh Module*: **[Comprehensive Review](./Mod_7-comprenReview.md)** | Este módulo final sirve como una revisión integral de todo lo que has aprendido en los módulos anteriores. Te ayudará a consolidar tus conocimientos y a prepararte para cualquier examen o evaluación que puedas tener. |
-
+| <div align="center"><img src="https://i.postimg.cc/K8KbGFZR/image-5.png" width="150"/><br> *First Module*: **[Introducción a las bases de datos relacionales](./M1_introDBR.md)** </div> | Este módulo cubre los **conceptos básicos de las bases de datos relacionales** incluyendo: <br> - ¿Qué son **entidades y atributos?** <br> - **Relaciones entre entidades** <br> - **Diagrama de entidad-relación** (`ERD`) <br> - Tipos de **datos y constraints** <br> - **Normalización** de bases de datos <br> - **Diagrama fisico** de una base de datos | 
+| <div align="center"><img src="https://i.postimg.cc/15bmN47p/image.png" width="150"/><br> *Second Module*: **[RDBMS (MySQL)](./M2_RDBMS_DBA.md)** </div> | Este módulo cubre los **conceptos básicos de los sistemas de gestión de bases de datos relacionales** incluyendo: <br> - **¿Qué es RBD y RDBMS?** <br> - **Clientes gráficos de MySQL** <br> - **Servicios administrados de MySQL** |
+| <div align="center"><img src="https://i.postimg.cc/jqgdtMz3/imagen-2024-07-01-165330075.png" width="150"/><br> *Third Module*: **[Primeras consultas SQL y manejo de bases de datos](./M3_SQL_Manage.md)** </div> | Este módulo cubre los **conceptos básicos de las consultas SQL** incluyendo: <br> - **`DDL` (Data Definition Language)** <br> - **`DML` (Data Manipulation Language)** <br> - Una breve intro de **`DCL` (Data Control Language) y `TCL` (Transaction Control Language)** <br> - ¿Qué tan **`standard` es SQL?** <br> - Creación de tablas (**independientes, dependientes y transitivas**) |
+| <div align="center"><img src="https://i.postimg.cc/PrYc2xrb/image-6.png" width="150"/><br> *Fourth Module*: **[Consultas SQL a una base de datos](./M4_Querys.md)** </div> | Este módulo cubre los **conceptos básicos y avanzados de las consultas SQL** incluyendo: <br> - **¿Por qué las consultas son tan importantes?** <br> - **Estructura básica de una consulta SQL** <br> - Funciones de **agregación y agrupación** <br>- **Primera parte: `SELECT`** <br> - **Segunda parte: `FROM`** <br> - Sentencias de intersección **`JOIN`** <br> - **Tercera parte: `WHERE`** <br> - **`WHERE` con operadores de comparación** <br> - **Operador `LIKE`** <br> - Operador `BEETWEEN` <br> - **Operadores logicos `AND`, `OR` y `NOT`** <br> - **Cuarta parte: `GROUP BY`** <br> - **Quinta parte: `ORDER BY` y `HAVING`** | 
 
 </div>
 
@@ -36,6 +26,3 @@
 > 
 > - In addition, for view models **you will download the plugin of `Draw.io Integration` in your IDE.**
 
-
-
-Juntos, estos archivos te proporcionarán una comprensión sólida de cómo trabajar eficientemente en la terminal.

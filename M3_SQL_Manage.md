@@ -2,6 +2,11 @@
 
 # **Primeras consultas SQL y manejo de bases de datos**
 
+<p align="center">
+  <img src="https://i.postimg.cc/C5DvPPYM/image-7.png" alt="Aquí va el texto del enlace" width="500">
+</p>
+
+
 </div>
 
 # **Tabla de contenido**

@@ -11,6 +11,10 @@
   - [1.1. **`Tipos de API's`**](#11-tipos-de-apis)
   - [1.2. **`Funciones clave de una API`**](#12-funciones-clave-de-una-api)
 - [2. **Qué son las API's REST**](#2-qué-son-las-apis-rest)
+- [3. **Insomnia y Postman**](#3-insomnia-y-postman)
+  - [3.1. ***Insomnia***](#31-insomnia)
+  - [3.2. ***Postman***](#32-postman)
+    - [3.3.](#33)
 
 # 1. **Qué son las API's**
 
@@ -47,4 +51,41 @@ Las API's (Application Programming Interface) son un conjunto de reglas y defini
 
 # 2. **Qué son las API's REST**
 
-Las API's REST (Representational State Transfer) son un tipo de API que utiliza el protocolo **HTTP** para realizar las solicitudes y respuestas. Son fáciles de usar y permiten una comunicación rápida y eficiente entre aplicaciones.
+Las API's REST (Representational State Transfer) son un tipo de API que utiliza el protocolo **HTTP** y utiliza operaciones **HTTP** estándar como **`GET`**, **`POST`**, **`PUT`** y **`DELETE`**  para realizar las solicitudes y respuestas. 
+
+- A través de los endpoints **(/endpoint)** se le pide información al dominio, por lo general, se nos devuelve la información empaquetada en un **`JSON`**.
+
+Las operaciones **HTTP** son conocidas como métodos HTTP, y corresponden a las acciones CRUD (Create, Read, Update, Delete) que se pueden realizar sobre los datos de la aplicación.
+
+<div align="center">
+
+| Método HTTP | Acronimo | Descripción |
+| --- | --- | --- |
+| **`POST`** | **Crear `(Create)`** | Se utiliza para crear un nuevo recurso. |
+| **`GET`** | **Leer `(Read)`** | Se utiliza para obtener información de un recurso. |
+| **`PUT`** | **Actualizar `(Update)`** | Se utiliza para actualizar todos los datos de un recurso existente.
+| **`PATCH`** | **Actualizar `(Update)`** | Se utiliza para actualizar los datos que se estan actualizando de un recurso existente. |
+| **`DELETE`** | **Eliminar `(Delete)`** | Se utiliza para eliminar un recurso existente. |
+
+</div>
+
+# 3. **Insomnia y Postman**
+
+## 3.1. ***Insomnia***
+
+Insomnia es un cliente de API popular que permite a los desarrolladores realizar solicitudes **HTTP** y **REST** para probar **APIs**.
+
+- Proporciona una interfaz fácil de usar para crear y gestionar solicitudes, así como características como:
+  - autenticación
+  - variables de entorno
+  - generación de código.
+
+- Con Insomnia, puedes enviar fácilmente solicitudes, ver respuestas y depurar interacciones con la API.
+
+## 3.2. ***Postman***
+
+Postman es otro cliente de **`API`** ampliamente utilizado que simplifica el proceso de prueba y documentación de APIs. 
+
+- Ofrece un conjunto completo de herramientas para diseñar, probar y monitorear APIs. Con Postman, puedes crear solicitudes, organizarlas en colecciones y automatizar flujos de trabajo. También proporciona características como historial de solicitudes, scripts de prueba y capacidades de colaboración.
+
+### 3.3. 

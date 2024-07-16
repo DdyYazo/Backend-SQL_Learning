@@ -219,3 +219,133 @@ SELECT status, MONTHNAME(fecha_publicacion) AS mes, COUNT(*) AS cantidad_posts
 FROM posts
 GROUP BY status, mes;
 
+
+
+/* ----- USOS DE ORDER BY ----- */
+
+-- Ordenar los posts por la fecha_publicacion de manera ascendentE
+
+SELECT *
+FROM posts
+ORDER BY fecha_publicacion ASC;
+
+-- Ordenar los posts por el id de manera descendente
+
+SELECT *
+FROM posts
+ORDER BY id DESC;
+
+-- Ordenar los posts por el status de manera ascendente y por el id de manera descendente
+
+SELECT *
+FROM posts
+ORDER BY status ASC, id DESC;
+
+/* ----- USOS DE LIMIT ----- */
+
+-- Ordenar los posts por el usuario_id de manera ascendente y mostrar solo los primeros 10 registro
+
+SELECT *
+FROM posts
+ORDER BY user_id ASC
+LIMIT 10;
+
+/* ----- GROUP BY CON ORDER BY ----- */
+
+-- Agrupar los posts por el mes de fecha_publicacion y el status, mostrando tambien la cantidad de posts por mes y status, ordenados por el mes
+
+SELECT MONTHNAME(fecha_publicacion) AS mes, status, COUNT(*) AS cantidad_posts
+FROM posts
+GROUP BY mes, status
+ORDER BY mes;
+
+/* ----- USOS DE HAVING ----- */
+
+-- Agrupar los posts por el mes de fecha_publicacion y el status, mostrando tambien la cantidad de posts por mes y status, ordenados por el mes y mostrar solo los meses que tengan mas de 10 posts
+
+SELECT MONTHNAME(fecha_publicacion) AS mes, status, COUNT(*) AS cantidad_posts
+FROM posts
+GROUP BY mes, status
+HAVING cantidad_posts > 10
+ORDER BY mes;
+
+/* ----- USO DE SUBCONSULTA EN VEZ DE HAVING ----- */
+
+-- Agrupar los posts por el mes de fecha_publicacion y el status, mostrando tambien la cantidad de posts por mes y status, ordenados por el mes y mostrar solo los meses que tengan mas de 10 posts
+
+SELECT * 
+FROM (
+    SELECT MONTHNAME(fecha_publicacion) AS mes, status, COUNT(*) AS cantidad_posts
+    FROM posts
+    GROUP BY mes, status
+) AS posts_agrupados
+WHERE posts_agrupados.cantidad_posts > 10
+
+
+/* ----- NESTED QUERIES ----- */
+
+--- Crear primero una tabla llamada new_table_proyection y luego realizamos count
+
+SELECT new_table_projection.date, COUNT(*) AS posts_count
+FROM (
+    SELECT DATE(MIN(fecha_publicacion)) AS date, YEAR(fecha_publicacion) AS post_year
+    FROM posts
+    GROUP BY post_year
+) AS new_table_projection
+GROUP BY new_table_projection.date 
+ORDER BY new_table_projection.date;
+
+
+/* ----- GROUP CONCAT ----- */
+
+-- Los tags que tiene un post separados por slash
+
+SELECT P.id, P.titulo, GROUP_CONCAT(DISTINCT tags.nombre ORDER BY tags.nombre SEPARATOR ' / ') AS tags
+FROM posts P
+LEFT JOIN posts_tags PT ON P.id = PT.post_id
+LEFT JOIN tags T ON PT.tag_id = T.id
+GROUP BY P.id, P.titulo;
+ORDER BY tags;
+
+/* ----- USO CASE WHEN ----- */
+
+-- Mostrar los posts donde las fechas_publicacion mayores a 2023 son las mas recientes y las que estan entre 2021 y 2022 son las mas antiguas
+
+SELECT titulo, fecha_publicacion,
+CASE 
+    WHEN fecha_publicacion > '2023-01-01' THEN 'Reciente'
+    WHEN fecha_publicacion BETWEEN '2021-01-01' AND '2022-12-31' THEN 'Antiguo'
+    ELSE 'No aplica'
+END AS rango
+FROM posts;
+
+--------------------------------------
+--------------------------------------
+--------------------------------------
+/* ----- RETO FINAL CON TODOS LOS CONCEPTOS APRENDIDOS ----- */
+
+CREATE TABLE IF NOT EXISTS comentarios (
+  id INT(11) NOT NULL,
+  cuerpo_comentario TEXT NOT NULL,
+  usuario_id INT NOT NULL, 
+  post_id INT NOT NULL, 
+  PRIMARY KEY (id),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+INSERT INTO comentarios (id, cuerpo_comentario, usuario_id, post_id) 
+VALUES (1, "Me gustó mucho este post", 1, 43),
+        (2, "Por favor hagan más", 1, 53),
+        (3, "Nah, no habrá autos así en mucho tiempo", 2, 56);
+
+SELECT * FROM comentarios;
+
+SELECT
+    posts.titulo AS post,
+    usuarios.login AS usuario,
+    comentarios.cuerpo_comentario AS comentario
+FROM comentarios
+  INNER JOIN posts ON posts.id = comentarios.post_id
+  INNER JOIN usuarios ON usuarios.id = comentarios.usuario_id
+WHERE comentarios.usuario_id = 1;

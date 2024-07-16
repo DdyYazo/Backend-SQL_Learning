@@ -2,45 +2,62 @@
 
 # **Consultas SQL a una base de datos**
 
+<p align="center">
+  <img src="https://i.postimg.cc/FR1DmpyT/image-1.png" alt="Aquí va el texto del enlace" width="500">
+</p>
+
 </div>
+
+
 
 # **Tabla de contenido**
 - [**Consultas SQL a una base de datos**](#consultas-sql-a-una-base-de-datos)
 - [**Tabla de contenido**](#tabla-de-contenido)
 - [1. **Importancia de las consultas SQL**](#1-importancia-de-las-consultas-sql)
   - [1.1. ***¿Por qué las consultas son tan importantes?***](#11-por-qué-las-consultas-son-tan-importantes)
-- [2. **Funciones de agregación en una consulta SQL (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`)**](#2-funciones-de-agregación-en-una-consulta-sql-count-sum-avg-min-max)
-- [3. **Estructura basica de una consulta SQL (`SELECT`, `FROM`, `WHERE`, `GROUP BY`, `ORDER BY`, `HAVING`)**](#3-estructura-basica-de-una-consulta-sql-select-from-where-group-by-order-by-having)
+- [2. **Estructura basica de una consulta SQL (`SELECT`, `FROM`, `WHERE`, `GROUP BY`, `ORDER BY`, `HAVING`)**](#2-estructura-basica-de-una-consulta-sql-select-from-where-group-by-order-by-having)
       - [**\_Las consultas, se realizaran en la base de datos de *platziblog***](#_las-consultas-se-realizaran-en-la-base-de-datos-de-platziblog)
-  - [3.1. ***Primera parte: `SELECT`***](#31-primera-parte-select)
-    - [3.1.1. **Características de `SELECT`\_**](#311-características-de-select_)
-    - [3.1.2. **Ejemplos de `SELECT`**](#312-ejemplos-de-select)
-  - [3.2. ***Segunda parte: `FROM`***](#32-segunda-parte-from)
-  - [3.3. ***\_Sentencias `JOIN`***](#33-_sentencias-join)
-    - [3.3.1. **La forma correcta de entender la estructura de una sentencia `JOIN`**](#331-la-forma-correcta-de-entender-la-estructura-de-una-sentencia-join)
-    - [3.3.2. **Ejm: `LEFT JOIN` con intersección y sin intersección**](#332-ejm-left-join-con-intersección-y-sin-intersección)
-    - [3.3.3. **Ejm: `RIGHT JOIN` con intersección y sin intersección**](#333-ejm-right-join-con-intersección-y-sin-intersección)
-    - [3.3.4. **Ejm: `INNER JOIN`**](#334-ejm-inner-join)
-    - [3.3.5. **Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección**](#335-ejm-union-o-full-outer-joincon-intersección-y-sin-intersección)
-    - [3.3.6. **Ejm: `JOINS` con alias `AS`**](#336-ejm-joins-con-alias-as)
-  - [3.4. ***Tercera parte: `WHERE`***](#34-tercera-parte-where)
-    - [3.4.1. **Operadores de comparación (`=`, `>`, `<`, `>=`, `<=`, `!=`, `<>`) para filtrar a partir de cierto `numero` o `string`**](#341-operadores-de-comparación--------para-filtrar-a-partir-de-cierto-numero-o-string)
-    - [3.4.2. **Operador `LIKE` para filtrar a partir de cierto texto**](#342-operador-like-para-filtrar-a-partir-de-cierto-texto)
-    - [3.4.3. **Operador `BETWEEN` usando `AND` o `OR` para filtrar a partir de un rango de valores**](#343-operador-between-usando-and-o-or-para-filtrar-a-partir-de-un-rango-de-valores)
-    - [3.4.4. **Negación de los operadores `LIKE` y `BETWEEN`**](#344-negación-de-los-operadores-like-y-between)
-  - [3.5. ***\_Sentencia `WHERE` con valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT`***](#35-_sentencia-where-con-valores-nulos-is-null-y-is-not-null-y-operadores-logicos-and-or-y-not)
-    - [3.5.1. **`El valor `NULL\`**](#351-el-valor-null)
-    - [3.5.2. **Operadores logicos `AND`,  `OR` y `NOT`**](#352-operadores-logicos-and--or-y-not)
-    - [3.5.3. **Ejemplos de `WHERE` con valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT`**](#353-ejemplos-de-where-con-valores-nulos-is-null-y-is-not-null-y-operadores-logicos-and-or-y-not)
-    - [3.5.4. **Alterando la jerarquía de los operadores lógicos**](#354-alterando-la-jerarquía-de-los-operadores-lógicos)
-  - [3.6. ***Cuarta parte: `GROUP BY`***](#36-cuarta-parte-group-by)
-    - [3.6.1. **Ejemplos de `GROUP BY`**](#361-ejemplos-de-group-by)
-  - [3.7.***Quinta parte: `ORDER BY` y `HAVING`***](#37quinta-parte-order-by-y-having)
-    - [3.7.1. **Secuencias auxiliares en la sentencia `ORDER BY`**](#371-secuencias-auxiliares-en-la-sentencia-order-by)
-    - [3.7.2. **Ejemplos de `ORDER BY`**](#372-ejemplos-de-order-by)
-  - [3.7. ***Secuencia auxiliar \_`HAVING`***](#37-secuencia-auxiliar-_having)
-    - [3.7.1. **Caso de ejemplo en el que se usa `HAVING`**](#371-caso-de-ejemplo-en-el-que-se-usa-having)
-- [**\_Ejercicio de ejemplo de query utilizando toda la estructura de una consulta SQL**](#_ejercicio-de-ejemplo-de-query-utilizando-toda-la-estructura-de-una-consulta-sql)
+- [2.1. **Primera parte: `SELECT`**](#21-primera-parte-select)
+  - [2.1.1. ***Características de `SELECT`***](#211-características-de-select)
+  - [2.1.2. ***Ejemplos de `SELECT`***](#212-ejemplos-de-select)
+  - [2.1.3. ***\_\_Funciones de agregación en una consulta SQL (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`)***](#213-__funciones-de-agregación-en-una-consulta-sql-count-sum-avg-min-max)
+- [2.2. **Segunda parte: `FROM`**](#22-segunda-parte-from)
+- [2.3. **\_\_Sentencias `JOIN`**](#23-__sentencias-join)
+  - [2.2.1. ***La forma correcta de entender la estructura de una sentencia `JOIN`***](#221-la-forma-correcta-de-entender-la-estructura-de-una-sentencia-join)
+  - [2.2.2. ***Ejm: `LEFT JOIN` con intersección y sin intersección***](#222-ejm-left-join-con-intersección-y-sin-intersección)
+  - [2.3.3. ***Ejm: `RIGHT JOIN` con intersección y sin intersección***](#233-ejm-right-join-con-intersección-y-sin-intersección)
+  - [2.2.4. ***Ejm: `INNER JOIN`***](#224-ejm-inner-join)
+  - [2.2.5. ***Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección***](#225-ejm-union-o-full-outer-joincon-intersección-y-sin-intersección)
+  - [2.3.6. ***Ejm: `JOINS` con alias `AS`***](#236-ejm-joins-con-alias-as)
+- [2.4. **Tercera parte: `WHERE`**](#24-tercera-parte-where)
+  - [2.4.1. ***`WHERE` -\> Operadores de comparación (`=`, `>`, `<`, `>=`, `<=`, `!=`, `<>`) para filtrar a partir de cierto `numero` o `string`***](#241-where---operadores-de-comparación--------para-filtrar-a-partir-de-cierto-numero-o-string)
+  - [2.4.2. ***`WHERE` -\> Operador `LIKE` para filtrar a partir de cierto texto***](#242-where---operador-like-para-filtrar-a-partir-de-cierto-texto)
+  - [2.4.3. ***`WHERE` -\> Operador `BETWEEN` usando `AND` o `OR` para filtrar a partir de un rango de valores***](#243-where---operador-between-usando-and-o-or-para-filtrar-a-partir-de-un-rango-de-valores)
+    - [2.4.4. **Negación de los operadores `LIKE` y `BETWEEN`**](#244-negación-de-los-operadores-like-y-between)
+- [2.5. **\_\_Valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT` en `WHERE`**](#25-__valores-nulos-is-null-y-is-not-null-y-operadores-logicos-and-or-y-not-en-where)
+  - [2.5.1. ***El valor `NULL`***](#251-el-valor-null)
+  - [2.5.2. ***Operadores logicos `AND`,  `OR` y `NOT`***](#252-operadores-logicos-and--or-y-not)
+    - [2.5.3. **Ejemplos de `WHERE` con valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT`**](#253-ejemplos-de-where-con-valores-nulos-is-null-y-is-not-null-y-operadores-logicos-and-or-y-not)
+  - [2.5.4. ***Alterando la jerarquía de los operadores lógicos mediante `()`***](#254-alterando-la-jerarquía-de-los-operadores-lógicos-mediante-)
+- [2.6. **Cuarta parte: `GROUP BY`**](#26-cuarta-parte-group-by)
+  - [2.6.1. ***Ejemplos de `GROUP BY`***](#261-ejemplos-de-group-by)
+- [2.7.**Quinta parte: `ORDER BY` y `HAVING`**](#27quinta-parte-order-by-y-having)
+- [2.7.1. **\_\_Secuencias auxiliares en la sentencia `ORDER BY`**](#271-__secuencias-auxiliares-en-la-sentencia-order-by)
+  - [2.7.2. ***Ejemplos de `ORDER BY`***](#272-ejemplos-de-order-by)
+- [2.8. **\_\_Secuencia auxiliar `HAVING`**](#28-__secuencia-auxiliar-having)
+  - [2.8.1. ***Caso de ejemplo en el que se usa `HAVING`***](#281-caso-de-ejemplo-en-el-que-se-usa-having)
+- [**\_\_Ejercicio de ejemplo de query utilizando toda la estructura de una consulta SQL**](#__ejercicio-de-ejemplo-de-query-utilizando-toda-la-estructura-de-una-consulta-sql)
+- [4. **El interminable agujero de conejo (`Nested queries`)**](#4-el-interminable-agujero-de-conejo-nested-queries)
+  - [4.1. ***Recomendaciones al utilizar los `Nested queries`***](#41-recomendaciones-al-utilizar-los-nested-queries)
+  - [4.2. ***Ejemplos de `Nested queries`***](#42-ejemplos-de-nested-queries)
+- [5. **¿Como convertir una pregunta en una consulta SQL?**](#5-como-convertir-una-pregunta-en-una-consulta-sql)
+  - [5.1. ***Preguntandole a la base de datos***](#51-preguntandole-a-la-base-de-datos)
+- [6. **Función `GROUP CONCAT`**](#6-función-group-concat)
+  - [6.1. ***Opciones de la función `GROUP CONCAT`***](#61-opciones-de-la-función-group-concat)
+  - [6.2. ***Ejemplo de la función `GROUP CONCAT`***](#62-ejemplo-de-la-función-group-concat)
+- [7. **`CASE` y `WHEN`**](#7-case-y-when)
+  - [7.1. ***Ejemplo de la sentencia `CASE`***](#71-ejemplo-de-la-sentencia-case)
+  - [7.2. ***`JOIN` con `CASE`***](#72-join-con-case)
 
 # 1. **Importancia de las consultas SQL**
 
@@ -64,23 +81,9 @@ Las consultas o queries a una base de datos son una parte fundamental ya que est
 
 3. Se puede aprender a hacer consultas, mejorando nuestra habilidad en ello a lo largo del tiempo.
 
-# 2. **Funciones de agregación en una consulta SQL (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`)**
-
-Las funciones de agregación son funciones que permiten hacer operaciones matemáticas en una columna de una tabla.
-
-<div align="center">
-
-| **Función** | **Descripción** |
-| --- | --- |
-| **`COUNT`** | Cuenta la cantidad de registros de una tabla. |
-| **`SUM`** | Suma los valores de una columna. |
-| **`AVG`** | Calcula el promedio de los valores de una columna. |
-| **`MIN`** | Muestra el valor mínimo de una columna. |
-| **`MAX`** | Muestra el valor máximo de una columna. |
-
 </div>
 
-# 3. **Estructura basica de una consulta SQL (`SELECT`, `FROM`, `WHERE`, `GROUP BY`, `ORDER BY`, `HAVING`)**
+# 2. **Estructura basica de una consulta SQL (`SELECT`, `FROM`, `WHERE`, `GROUP BY`, `ORDER BY`, `HAVING`)**
 
 Los queries **son la forma en la que estructuramos las preguntas que se harán a la base de datos. `Transforma preguntas en sintaxis.`** 
 
@@ -121,12 +124,12 @@ y tambien puede aparecer una tercera parte como **WHERE** que se encarga de filt
 #### **_Las consultas, se realizaran en la base de datos de *[platziblog](./sql/platziblogQuerys.sql)***
 
 
-## 3.1. ***Primera parte: `SELECT`***
+# 2.1. **Primera parte: `SELECT`**
 
 La primera parte de una consulta es `SELECT`, que se encarga de seleccionar los campos que se quieren mostrar en la consulta.
 
 
-### 3.1.1. **Características de `SELECT`_**
+## 2.1.1. ***Características de `SELECT`***
 > [!NOTE]
 >
 > 1. **Un `SELECT` debe tener como mínimo un `FROM` para poder funcionar**. Cuando queremos traer todos los atributos de una tabla, **podemos usar el `(*)` para omitir colocar todos atributos al lado del `SELECT` uno por uno.**
@@ -135,7 +138,7 @@ La primera parte de una consulta es `SELECT`, que se encarga de seleccionar los 
 
 3. **Existe una función de `SELECT` para poder contar la cantidad de registros**. Esa información (un número) será el resultado del query.
 
-### 3.1.2. **Ejemplos de `SELECT`**
+## 2.1.2. ***Ejemplos de `SELECT`***
 
 ```sql
 --- Consulta para traer todos los campos de la tabla `posts`
@@ -157,7 +160,24 @@ SELECT COUNT(*) AS cantidad_registros FROM posts;
 
 ```
 
-## 3.2. ***Segunda parte: `FROM`***
+## 2.1.3. ***__Funciones de agregación en una consulta SQL (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`)***
+
+Las funciones de agregación son funciones que permiten hacer operaciones matemáticas en una columna de una tabla.
+
+<div align="center">
+
+| **Función** | **Descripción** |
+| --- | --- |
+| **`COUNT`** | Cuenta la cantidad de registros de una tabla. |
+| **`SUM`** | Suma los valores de una columna. |
+| **`AVG`** | Calcula el promedio de los valores de una columna. |
+| **`MIN`** | Muestra el valor mínimo de una columna. |
+| **`MAX`** | Muestra el valor máximo de una columna. |
+
+</div>
+
+
+# 2.2. **Segunda parte: `FROM`**
 
 La segunda parte de una consulta es `FROM`, que se encarga de seleccionar la tabla de la que se quieren mostrar los campos.
 
@@ -167,7 +187,7 @@ La segunda parte de una consulta es `FROM`, que se encarga de seleccionar la tab
 >
 > *Los diagramas de Venn* **son círculos que se cruzan en algún punto** para ver dónde está la intersección de conjuntos. **Ayudan mucho para poder formular la sentencia `JOIN` de la manera adecuada dependiendo del `query` que se quiere hacer.**
 
-## 3.3. ***_Sentencias `JOIN`***
+# 2.3. **__Sentencias `JOIN`**
 
 <p align="center">
   <img src="https://i.postimg.cc/HkcrgbcM/image-3.png" alt="Aquí va el texto del enlace" width="450">
@@ -175,6 +195,7 @@ La segunda parte de una consulta es `FROM`, que se encarga de seleccionar la tab
 <p align="center">
   <strong>Diagramas de Venn para `JOIN`</strong>
 </p>
+
 
 <div align="center">
 
@@ -190,7 +211,8 @@ La segunda parte de una consulta es `FROM`, que se encarga de seleccionar la tab
 
 </div>
 
-### 3.3.1. **La forma correcta de entender la estructura de una sentencia `JOIN`**
+
+## 2.2.1. ***La forma correcta de entender la estructura de una sentencia `JOIN`***
 
 ```sql
 SELECT *
@@ -202,7 +224,7 @@ JOIN tabla2 ON tabla1.id = tabla2.id_table1;
 >
 > En la estructura de la consulta de los JOIN luego de la sentencia `ON` se coloca el campo que relaciona las tablas. **En este caso `tabla1.id = tabla2.id`**. Teniendo en cuenta que la tabla `tabla1` tiene un campo `id` y la tabla `tabla2` tiene un campo `id_table1` que es el que relaciona las tablas.
 
-### 3.3.2. **Ejm: `LEFT JOIN` con intersección y sin intersección**
+## 2.2.2. ***Ejm: `LEFT JOIN` con intersección y sin intersección***
 
 **`LEFT JOIN` con intersección**
 
@@ -225,7 +247,7 @@ LEFT JOIN posts ON usuarios.id = posts.user_id
 WHERE posts.user_id IS NULL;
 ```
 
-### 3.3.3. **Ejm: `RIGHT JOIN` con intersección y sin intersección**
+## 2.3.3. ***Ejm: `RIGHT JOIN` con intersección y sin intersección***
 
 **`RIGHT JOIN` con intersección**
 
@@ -248,7 +270,7 @@ RIGHT JOIN posts ON usuarios.id = posts.user_id
 WHERE usuarios.id IS NULL;
 ```
 
-### 3.3.4. **Ejm: `INNER JOIN`**
+## 2.2.4. ***Ejm: `INNER JOIN`***
 
 - Consultar todos los post que sí hayan hecho posts, con su respectivo post
 
@@ -258,7 +280,7 @@ FROM usuarios
 INNER JOIN posts ON usuarios.id = posts.user_id;
 ```
 
-### 3.3.5. **Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección**
+## 2.2.5. ***Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección***
 
 **`UNION` con intersección**
 
@@ -296,7 +318,7 @@ FROM usuarios
 FULL OUTER JOIN posts ON usuarios.id = posts.user_id
 WHERE usuarios.id IS NULL OR posts.user_id IS NULL;
 ```
-### 3.3.6. **Ejm: `JOINS` con alias `AS`**
+## 2.3.6. ***Ejm: `JOINS` con alias `AS`***
 
 - En este ejemplo se consulta los cursos con su respectivo profesor trayendo los campos (`courses.id`, `courses.name`, `courses.teacher_id`, `teachers.name`) de las tablas `courses` y `teachers` respectivamente.
 
@@ -311,11 +333,11 @@ LEFT JOIN teachers ON courses.teacher_id = teachers.id
 WHERE courses.teacher_id IS NOT NULL;
 ```
 
-## 3.4. ***Tercera parte: `WHERE`***
+# 2.4. **Tercera parte: `WHERE`**
 
 La tercera parte de una consulta es `WHERE`, que se encarga de filtrar los registros (filas de la tabla). 
 
-### 3.4.1. **Operadores de comparación (`=`, `>`, `<`, `>=`, `<=`, `!=`, `<>`) para filtrar a partir de cierto `numero` o `string`**
+## 2.4.1. ***`WHERE` -> Operadores de comparación (`=`, `>`, `<`, `>=`, `<=`, `!=`, `<>`) para filtrar a partir de cierto `numero` o `string`***
 
 Los **`operadores de comparación` permiten filtrar los datos de una tabla a partir de cierto número o cadena de texto que se quiera obtener.**
 
@@ -352,7 +374,7 @@ WHERE status <> 'inactivo';
 
 
 
-### 3.4.2. **Operador `LIKE` para filtrar a partir de cierto texto**
+## 2.4.2. ***`WHERE` -> Operador `LIKE` para filtrar a partir de cierto texto***
 
 El operador **`LIKE` permite filtrar los datos de una tabla de los cuales conocemos sólo una parte de la información. Esta cadena de texto debe ir entre comillas simples y signos de porcentaje `%`** buscando una cadena de texto en cualquier parte de la columna.
 
@@ -368,7 +390,7 @@ WHERE titulo LIKE '%escandalo%';
 >
 > Los signos porcentuales `%` indican que hay algo más, **si se quita, por ejemplo, el del final (quedando `‘%escandalo’`), se estaria buscando aquellos `titulos` que terminen con la palabra `‘escandalo’`,** ya que se esta indicando que despues de esta palabra **no hay nada mas**.
 
-### 3.4.3. **Operador `BETWEEN` usando `AND` o `OR` para filtrar a partir de un rango de valores**
+## 2.4.3. ***`WHERE` -> Operador `BETWEEN` usando `AND` o `OR` para filtrar a partir de un rango de valores***
 
 El operador **`BETWEEN` permite filtrar los datos de una tabla a partir de un rango de valores usando tambien el operador `AND` o `OR`**.
 
@@ -396,7 +418,7 @@ SELECT *
 FROM posts
 WHERE MONTH(fecha_publicacion) = '01';
 ```
-### 3.4.4. **Negación de los operadores `LIKE` y `BETWEEN`**
+### 2.4.4. **Negación de los operadores `LIKE` y `BETWEEN`**
 
 > [!IMPORTANT]
 >
@@ -420,16 +442,16 @@ FROM posts
 WHERE fecha_publicacion NOT BETWEEN '2019-01-01' AND '2019-01-10';
 ```
 
-## 3.5. ***_Sentencia `WHERE` con valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT`***
+# 2.5. **__Valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT` en `WHERE`**
 
-### 3.5.1. **`El valor `NULL`** 
+## 2.5.1. ***El valor `NULL`*** 
 
 Generalmente en una tabla `NULL` es su valor por defecto cuando no se le asigna algún valor a un campo. 
 
 - La sintaxis para hacer **busquedas de datos `NULL` es `IS NULL` y `IS NOT NULL` si son valores nulos o no nulos respectivamente.**
 
 
-### 3.5.2. **Operadores logicos `AND`,  `OR` y `NOT`**
+## 2.5.2. ***Operadores logicos `AND`,  `OR` y `NOT`***
  
 Para hacer una consulta `WHERE` mas robusta se pueden usar los operadores `AND` y `OR` para hacer consultas mas complejas. 
 
@@ -439,7 +461,7 @@ Para hacer una consulta `WHERE` mas robusta se pueden usar los operadores `AND` 
 
 - **`NOT` se usa para negar una condición.**
 
-### 3.5.3. **Ejemplos de `WHERE` con valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT`**
+### 2.5.3. **Ejemplos de `WHERE` con valores nulos `IS NULL` y `IS NOT NULL` y operadores logicos `AND`, `OR` y `NOT`**
 
 1. **Filtrar los posts donde el `id` del `usuario` sea `NOT NULL`**
 
@@ -483,7 +505,7 @@ AND NOT id > 60
 AND NOT YEAR(fecha_publicacion) <> 2025;
 ```
 
-### 3.5.4. **Alterando la jerarquía de los operadores lógicos**
+## 2.5.4. ***Alterando la jerarquía de los operadores lógicos mediante `()`***
 
 > [!IMPORTANT]
 >
@@ -511,11 +533,11 @@ OR estatus = 'inactivo'
 El primer query a diferencia del segundo, **se ejecutará primero el `OR` y luego el `AND`, ya que el parentesis indica que se ejecute primero el `OR` y luego el `AND`.**
 
 
-## 3.6. ***Cuarta parte: `GROUP BY`***
+# 2.6. **Cuarta parte: `GROUP BY`**
 
 La cuarta parte de una consulta es `GROUP BY`, tiene que ver con agrupaciones de datos. Indica a la base de datos que agrupe los datos que cumplan con una condición.
 
-### 3.6.1. **Ejemplos de `GROUP BY`**
+## 2.6.1. ***Ejemplos de `GROUP BY`***
 
 1. **Agrupar la cantidad de posts por `status`**
 
@@ -549,11 +571,11 @@ FROM posts
 GROUP BY status, mes;
 ```
 
-## 3.7.***Quinta parte: `ORDER BY` y `HAVING`***
+# 2.7.**Quinta parte: `ORDER BY` y `HAVING`**
 
 La quinta parte de una consulta es `ORDER BY`, que se encarga de ordenar los datos de una tabla por un campo específico mediante una **`secuencia auxiliar`**.
 
-### 3.7.1. **Secuencias auxiliares en la sentencia `ORDER BY`**
+# 2.7.1. **__Secuencias auxiliares en la sentencia `ORDER BY`**
 
 <div align="center">
 
@@ -562,15 +584,17 @@ La quinta parte de una consulta es `ORDER BY`, que se encarga de ordenar los dat
 | **`ASC`** | **Ordena los datos de manera ascendente.** |
 | **`DESC`** | **Ordena los datos de manera descendente.** |
 | **`LIMIT`** | **Limita la cantidad de registros que se quieren mostrar.** |
+| **`HAVING`** | **Filtra los datos agrupados.** |
 
 </div>
+
 
 > [!NOTE]
 >
 > **En `SQL SERVER` no funciona el `LIMIT`, en su lugar se usa el `TOP`**
 > - Por otro lado, **las consultas por defecto se muestran en orden ascendente, por lo que no es necesario colocar `ASC` al final de la sentencia `ORDER BY`.**
 
-### 3.7.2. **Ejemplos de `ORDER BY`**
+## 2.7.2. ***Ejemplos de `ORDER BY`***
 
 1. **Ordenar los posts por la `fecha_publicacion` de manera `ascendente`**
 
@@ -628,14 +652,14 @@ GROUP BY mes, status
 ORDER BY mes;
 ```
 
-## 3.7. ***Secuencia auxiliar _`HAVING`***
+# 2.8. **__Secuencia auxiliar `HAVING`**
 
 La secuencia auxiliar `HAVING` se utiliza para filtrar los datos agrupados. **Es similar a `WHERE`, pero se usa después de `GROUP BY` y antes de `ORDER BY`.**
 
 > [!IMPORTANT]
 > No es tan común usar `HAVING` en las consultas, pero es útil cuando se quiere filtrar datos agrupados.
 
-### 3.7.1. **Caso de ejemplo en el que se usa `HAVING`**
+## 2.8.1. ***Caso de ejemplo en el que se usa `HAVING`***
 
 Si por ejemplo, siguiendo el ejemplo anterior donde se agrupan los posts por el mes de `fecha_publicacion` y el `status`, **se quiere filtrar la cantidad de posts que sean `mayor` a `10` lo mas común seria usar un `WHERE`**
 
@@ -672,7 +696,7 @@ SELECT * FROM (
 WHERE subconsulta.cantidad_posts > 10;
 ```
 
-# **_Ejercicio de ejemplo de query utilizando toda la estructura de una consulta SQL**
+# **__Ejercicio de ejemplo de query utilizando toda la estructura de una consulta SQL**
 
 1. Hay dos tablas:
 
@@ -719,3 +743,196 @@ GROUP BY courses.teacher_id -- Ordenar la agrupación de profesores
 HAVING total_reviews > 0 -- Ningun profesor debe tener 0 reviews debe tener al menos 1
 ORDER BY total_reviews DESC;
 ```
+
+# 4. **El interminable agujero de conejo (`Nested queries`)**
+
+- **`Nested queries`** o **`subconsultas`** son consultas dentro de otras consultas. **Se usan para hacer consultas más complejas y para hacer consultas que involucran más de una tabla.**
+
+- Se le conoce como un **producto cartesiano ya que se multiplican todos los registros de una tabla con todos los del nuevo `query`**. 
+
+> [!IMPORTANT]
+> 
+> Esto **provoca que el query sea difícil de procesar por lo pesado que puede resultar** (*El punto negativo de esto, es que puede volverse lento a la hora de ejecutar*).
+
+## 4.1. ***Recomendaciones al utilizar los `Nested queries`***
+
+> [!CAUTION]
+> 
+> - Su uso **puede volverse confuso** en un momento determinado **y poco escalable**.
+
+> [!NOTE]
+> 
+> - Es escencial Procurar que exista una buena normalizacion de las tablas.
+
+> [!TIP]
+> 
+> - Los `JOINS` son la mejor opción para casos de `SELECT`.
+
+## 4.2. ***Ejemplos de `Nested queries`***
+
+1. Ejemplo de `Nested queries` donde creamos primero una tabla llamada `new_table_proyection` y luego realizamos count
+
+```sql
+SELECT new_table_projection.date, COUNT(*) AS posts_count
+FROM (
+    SELECT DATE(MIN(fecha_publicacion)) AS date, YEAR(fecha_publicacion) AS post_year
+    FROM posts
+    GROUP BY post_year
+) AS new_table_projection
+GROUP BY new_table_projection.date 
+ORDER BY new_table_projection.date;
+```
+
+- En este ejemplo, la tabla `new_table_projection` es una tabla temporal que se crea a partir de una subconsulta. **Esta tabla se crea con la función `DATE(MIN(fecha_publicacion))` que obtiene la fecha mínima de la columna `fecha_publicacion` y la convierte en una fecha,** luego la agrupa por el año de la fecha de publicación. **Finalmente, se agrupa por la fecha y se cuenta la cantidad de posts por fecha.**
+
+2. Ejemplo de `Nested queries` donde se define un `WHERE` que sea la fecha maxima y traer el post de dicha fecha
+
+```sql
+SELECT *
+FROM posts
+WHERE fecha_publicacion = (
+    SELECT MAX(fecha_publicacion)
+    FROM posts
+);
+```
+
+# 5. **¿Como convertir una pregunta en una consulta SQL?**
+
+<div align="center">
+
+| **Sentencia** | **Descripción** |
+| --- | --- |
+| **`SELECT`** | **Lo que quieres mostrar** (Nickname, Título del post, etc).  |
+| **`FROM`** | **De dónde voy a tomar los datos** (Tabla usuarios, Tabla post, etc). |
+| **`WHERE`**  | **Los filtros de los datos que quieres mostrar** (Deben de ser ...). |
+| **`GROUP BY`** | **Los rubros por los que me interesa agrupar la información** (Si/No deseo agrupar). |
+| **`ORDER BY`** | **El orden en que quiero presentar mi información.'** |
+| **`HAVING`** | **Los filtros que quiero que mis datos agrupados tengan.** |
+
+</div>
+
+## 5.1. ***Preguntandole a la base de datos***
+
+1. **¿Cuántos tags tienen cada post?** 
+
+```sql
+SELECT P.id, P.titulo, COUNT(E.id) quantity_tags
+FROM posts P
+  LEFT JOIN post_etiqueta PE ON P.id = PE.post_id
+  LEFT JOIN etiquetas E ON PE.etiqueta_id = E.id
+GROUP BY P.id, P.titulo;
+ORDER BY quantity_tags DESC;
+```
+
+- En este caso considerando que existe una tabla transitiva llamada `post_etiqueta` que relaciona los `posts` con las `etiquetas` y se quiere saber cuantas etiquetas tiene cada post, es más conveniente usar un `LEFT JOIN` para que se muestren todos los posts aunque no tengan etiquetas.
+
+2. **¿Cuál es el tag que mas se repite?**
+  
+```sql
+SELECT E.id, E.nombre, COUNT(PE.id) ocurrency
+FROM etiquetas E
+  LEFT JOIN post_etiqueta PE ON E.id = PE.etiqueta_id
+GROUP BY E.id, E.nombre
+ORDER BY ocurrency DESC;
+```
+
+3. **¿Que etiqueta no tiene ningun post asociado?**
+
+```sql
+SELECT E.id, E.nombre_etiqueta
+FROM etiquetas E
+  LEFT JOIN post_etiqueta PE ON E.id = PE.etiqueta_id
+WHERE PE.id IS NULL;
+```
+
+4. **Las categorías ordenadas por numero de posts**
+
+```sql
+SELECT C.id, C.nombre, COUNT(P.id) quantity_posts
+FROM categorias C
+  LEFT JOIN posts P ON C.id = P.categoria_id
+GROUP BY C.id, C.nombre
+ORDER BY quantity_posts ASC;
+```
+
+# 6. **Función `GROUP CONCAT`**
+
+Es una función que permite concatenar los valores de una columna en una sola fila.
+
+## 6.1. ***Opciones de la función `GROUP CONCAT`***
+
+<div align="center">
+
+| **Opción** | **Descripción** |
+| --- | --- |
+| **`DISTINCT`** | **Permite que los valores concatenados no se repitan.** |
+| **`ORDER BY`** | **Permite ordenar los valores concatenados.** |
+| **`SEPARATOR`** | **Permite separar los valores concatenados por un separador.** |
+
+</div>
+
+## 6.2. ***Ejemplo de la función `GROUP CONCAT`***
+
+Complementando los ejemplos previos de **Preguntandole a la base de datos** se puede usar la función `GROUP CONCAT` para concatenar los valores de una columna en una sola fila.
+
+1. **Los tags que tiene un post separados por slash**
+
+```sql
+SELECT P.id, P.titulo, GROUP_CONCAT(DISTINCT E.nombre_etiqueta ORDER BY E.nombre_etiqueta SEPARATOR " / ") all_tags
+FROM posts P
+  LEFT JOIN post_etiqueta PE ON P.id = PE.post_id
+  LEFT JOIN etiquetas E ON E.id = PE.etiqueta_id
+GROUP BY P.id, P.titulo
+ORDER BY all_tags;
+```
+
+# 7. **`CASE` y `WHEN`**
+
+La sentencia `CASE` es una sentencia de control de flujo que permite realizar una evaluación condicional de una lista de expresiones y devolver un valor.
+
+## 7.1. ***Ejemplo de la sentencia `CASE`***
+
+1. **Mostrar el estatus de los posts en palabras**
+
+```sql
+SELECT titulo, 
+  CASE 
+    WHEN status = 'activo' THEN 'Activo'
+    WHEN status = 'inactivo' THEN 'Inactivo'
+    ELSE 'Desconocido'
+  END AS status
+FROM posts;
+```
+
+2. **Mostrar los posts donde las fechas_publicacion mayores a 2023 son las mas recientes y las que estan entre 2021 y 2022 son las mas antiguas**
+
+```sql
+SELECT titulo, 
+  CASE 
+    WHEN YEAR(fecha_publicacion) > '2023-01-01' THEN 'Reciente'
+    WHEN YEAR(fecha_publicacion) BETWEEN '2021-01-01' AND '2022-12-31' THEN 'Antiguo'
+    ELSE 'Desconocido'
+  END AS status
+FROM posts;
+```
+
+
+## 7.2. ***`JOIN` con `CASE`***
+
+1. **Mostrar los posts con el nombre de la categoria y el estatus de los posts**
+
+```sql
+SELECT P.titulo, 
+  CASE 
+    WHEN P.status = 'activo' THEN 'Activo'
+    WHEN P.status = 'inactivo' THEN 'Inactivo'
+    ELSE 'Desconocido'
+  END AS status,
+  C.nombre_categoria
+FROM categorias C
+  LEFT JOIN posts P ON C.id = P.categoria_id;
+```
+
+
+  
+

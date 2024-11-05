@@ -30,16 +30,22 @@
     - [2.3.1. *`UPDATES INSEGUROS`*](#231-updates-inseguros)
   - [2.4. **`DML "DELETE"`**](#24-dml-delete)
     - [2.4.1. *`DELETES INSEGUROS`*](#241-deletes-inseguros)
-- [3. **DCL (Data Control Language) y TCL (Transaction Control Language)**](#3-dcl-data-control-language-y-tcl-transaction-control-language)
-  - [3.1. **`DCL`**](#31-dcl)
-  - [3.2. **`TCL`**](#32-tcl)
-- [4. **¿Qué tan Standard es SQL?**](#4-qué-tan-standard-es-sql)
-  - [4.1. **`_Ejemplo`**](#41-_ejemplo)
-- [5. **Creando Tablas**](#5-creando-tablas)
-  - [5.1. **`TABLAS INDEPENDIENTES (SIN FOREIGN KEYS)`**](#51-tablas-independientes-sin-foreign-keys)
-  - [5.2. **`TABLAS DEPENDIENTES (CON FOREIGN KEYS)`**](#52-tablas-dependientes-con-foreign-keys)
-    - [5.2.1. *`FOREIGN KEY OPTIONS`*](#521-foreign-key-options)
-  - [5.3. **`TABLAS TRANSITIVAS (MUCHOS A MUCHOS)`**](#53-tablas-transitivas-muchos-a-muchos)
+- [3. **DCL (Data Control Language)**](#3-dcl-data-control-language)
+  - [3.1. **`GRANT`**](#31-grant)
+    - [3.1.1. *Activar los permisos con `FLUSH PRIVILEGES`*](#311-activar-los-permisos-con-flush-privileges)
+  - [3.2. **`REVOKE`**](#32-revoke)
+- [4. **TCL (Transaction Control Language)**](#4-tcl-transaction-control-language)
+  - [4.1. **Iniciar una transacción con `START TRANSACTION`**](#41-iniciar-una-transacción-con-start-transaction)
+  - [4.2. **`ROLLBACK`**](#42-rollback)
+  - [4.3. **`SAVEPOINT`**](#43-savepoint)
+  - [4.4. **`COMMIT`**](#44-commit)
+- [5. **¿Qué tan Standard es SQL?**](#5-qué-tan-standard-es-sql)
+  - [5.1. **`_Ejemplo`**](#51-_ejemplo)
+- [6. **Creando Tablas**](#6-creando-tablas)
+  - [6.1. **`TABLAS INDEPENDIENTES (SIN FOREIGN KEYS)`**](#61-tablas-independientes-sin-foreign-keys)
+  - [6.2. **`TABLAS DEPENDIENTES (CON FOREIGN KEYS)`**](#62-tablas-dependientes-con-foreign-keys)
+    - [6.2.1. *`FOREIGN KEY OPTIONS`*](#621-foreign-key-options)
+  - [6.3. **`TABLAS TRANSITIVAS (MUCHOS A MUCHOS)`**](#63-tablas-transitivas-muchos-a-muchos)
   - [**\_Revisar las consultas en el script *platziblog.sql* para ver las consultas de creación de las tablas**](#_revisar-las-consultas-en-el-script-platziblogsql-para-ver-las-consultas-de-creación-de-las-tablas)
 
 # 1. **Sublenguajes de SQL**
@@ -343,9 +349,7 @@ WHERE person_id = 1;
 DELETE FROM database.people;
 ```
 
-# 3. **DCL (Data Control Language) y TCL (Transaction Control Language)**
-
-## 3.1. **`DCL`**
+# 3. **DCL (Data Control Language)**
 
 Permite crear roles, permisos e integridad referencial, así como el control al acceso a la base de datos.
 
@@ -359,7 +363,59 @@ Permite crear roles, permisos e integridad referencial, así como el control al 
 
 </div>
 
-## 3.2. **`TCL`**
+## 3.1. **`GRANT`**
+
+Permite otorgar permisos a los usuarios.
+
+**Sintaixs:**
+
+```sql
+GRANT ALL PRIVILEGES ON * . * TO 'nombreUsuario'@'localhost';
+```
+
+- **Ejemplos:**
+  
+  1. Otorgar **todos los permisos** a un usuario en una base de datos. 
+
+```sql
+GRANT ALL PRIVILEGES ON * . * TO 'tydomex'@'localhost';
+```
+
+  2. Otorgar **permisos a una tabla específica** a un usuario en una base de datos.
+
+```sql
+GRANT PRIVILEGES ON metro_cdmx.estaciones TO 'tydomex'@'localhost';
+```
+
+  3. Otorgar **permisos a una columna específica** a un usuario en una base de datos.
+
+```sql
+GRANT SELECT (nombre) ON metro_cdmx.estaciones TO 'tydomex'@'localhost';
+```
+
+### 3.1.1. *Activar los permisos con `FLUSH PRIVILEGES`*
+
+```sql
+FLUSH PRIVILEGES;
+```
+
+## 3.2. **`REVOKE`**
+
+Permite revocar permisos a los usuarios.
+
+**Sintaxis:**
+
+```sql
+REVOKE ALL PRIVILEGES ON * . * FROM 'nombreUsuario'@'localhost';
+```
+
+- **Ejemplo:**
+
+```sql
+REVOKE ALL PRIVILEGES ON * . * FROM 'tydomex'@'localhost';
+```
+
+# 4. **TCL (Transaction Control Language)**
 
 Permite administrar diferentes transacciones que ocurren dentro de una base de datos.
 
@@ -374,7 +430,55 @@ Permite administrar diferentes transacciones que ocurren dentro de una base de d
 
 </div>
 
-# 4. **¿Qué tan Standard es SQL?**
+## 4.1. **Iniciar una transacción con `START TRANSACTION`**
+
+Permite iniciar una transacción.
+
+```sql
+START TRANSACTION AutoCommit = 0;
+```
+
+> [!NOTE]
+>
+> Por lo general **se suele incluir el `AutoCommit = 0` para que no se realice un commit automático de la transacción.**
+
+## 4.2. **`ROLLBACK`**
+
+Permite deshacer una transacción siendo de forma total o a través de un punto de guardado.
+
+```sql
+ROLLBACK;
+```
+
+- **Ejemplo:**
+
+```sql
+ROLLBACK TO savepoint1;
+```
+
+## 4.3. **`SAVEPOINT`**
+
+Permite establecer un punto de guardado en una transacción.
+
+```sql
+SAVEPOINT 'nameSavepoint';
+```
+
+- **Ejemplo:**
+
+```sql
+SAVEPOINT savepoint1;
+```
+
+## 4.4. **`COMMIT`**
+
+Permite confirmar una transacción al finalizar la operación.
+
+```sql
+COMMIT;
+```
+
+# 5. **¿Qué tan Standard es SQL?**
 
 La utilidad más grande de **SQL** fue unificar la forma en la que pensamos y hacemos preguntas a un repositorio de datos. Ahora que nacen nuevas bases de datos igualmente siguen tomando elementos de SQL. Podemos afirmar que: 
 
@@ -384,13 +488,13 @@ La utilidad más grande de **SQL** fue unificar la forma en la que pensamos y ha
 
 - Existen otros manejadores de datos como **Oracle** o **PostgreSQL**. Sin embargo, si escribimos en lenguaje SQL todos los manejadores funcionaran de manera similar.
 
-## 4.1. **`_Ejemplo`** 
+## 5.1. **`_Ejemplo`** 
 
 **`DDL`** y **`DML`** son exactamente las mismas para distintos manejadores de base de datos que tengan el standard **SQL**, existes algunos cambios sutiles que mas son funcionamiento interno del manejador de DB, por este motivo se puede ejecutar estos scripts por ejemplo en **PostgresSQL** y en **MySQL**
 
-# 5. **Creando Tablas**
+# 6. **Creando Tablas**
 
-## 5.1. **`TABLAS INDEPENDIENTES (SIN FOREIGN KEYS)`**
+## 6.1. **`TABLAS INDEPENDIENTES (SIN FOREIGN KEYS)`**
 
 Se empieza a plasmar la **BD de Platziblog** segun el **Diagrama Físico**. 
 
@@ -398,7 +502,7 @@ Se empieza a plasmar la **BD de Platziblog** segun el **Diagrama Físico**.
 > 
 > **Una buena práctica es comenzar creando las entidades que no tienen una `llave foránea`**. A estas tablas se les denomina, ***tablas independientes***. Generalmente **en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.**
 
-## 5.2. **`TABLAS DEPENDIENTES (CON FOREIGN KEYS)`**
+## 6.2. **`TABLAS DEPENDIENTES (CON FOREIGN KEYS)`**
 
 A diferencia de las **tablas independientes**, las **tablas dependientes** son aquellas que tienen una `llave foránea` que las relaciona con otra tabla.
 
@@ -418,7 +522,7 @@ A diferencia de las **tablas independientes**, las **tablas dependientes** son a
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 ```
-### 5.2.1. *`FOREIGN KEY OPTIONS`*
+### 6.2.1. *`FOREIGN KEY OPTIONS`*
 
 <img align="right" width="200px" src="https://i.postimg.cc/kXbBKrdz/imagen-2024-06-25-131531287.png" style="margin-left: 20px" >
 
@@ -440,7 +544,7 @@ romperá la relación.
 
 </div>
 
-## 5.3. **`TABLAS TRANSITIVAS (MUCHOS A MUCHOS)`**
+## 6.3. **`TABLAS TRANSITIVAS (MUCHOS A MUCHOS)`**
 
 Las tablas transitivas sirven como puente para unir dos tablas. No tienen contenido semántico. 
 

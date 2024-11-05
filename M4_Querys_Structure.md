@@ -23,12 +23,15 @@
   - [2.1.3. ***\_\_Funciones de agregación en una consulta SQL (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`)***](#213-__funciones-de-agregación-en-una-consulta-sql-count-sum-avg-min-max)
 - [2.2. **Segunda parte: `FROM`**](#22-segunda-parte-from)
 - [2.3. **\_\_Sentencias `JOIN`**](#23-__sentencias-join)
-  - [2.2.1. ***La forma correcta de entender la estructura de una sentencia `JOIN`***](#221-la-forma-correcta-de-entender-la-estructura-de-una-sentencia-join)
-  - [2.2.2. ***Ejm: `LEFT JOIN` con intersección y sin intersección***](#222-ejm-left-join-con-intersección-y-sin-intersección)
+  - [2.3.1. ***La forma correcta de entender la estructura de una sentencia `JOIN`***](#231-la-forma-correcta-de-entender-la-estructura-de-una-sentencia-join)
+  - [2.3.2. ***Ejm: `LEFT JOIN` con intersección y sin intersección***](#232-ejm-left-join-con-intersección-y-sin-intersección)
   - [2.3.3. ***Ejm: `RIGHT JOIN` con intersección y sin intersección***](#233-ejm-right-join-con-intersección-y-sin-intersección)
-  - [2.2.4. ***Ejm: `INNER JOIN`***](#224-ejm-inner-join)
-  - [2.2.5. ***Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección***](#225-ejm-union-o-full-outer-joincon-intersección-y-sin-intersección)
-  - [2.3.6. ***Ejm: `JOINS` con alias `AS`***](#236-ejm-joins-con-alias-as)
+  - [2.3.4. ***Ejm: `INNER JOIN`***](#234-ejm-inner-join)
+  - [2.3.5. ***Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección***](#235-ejm-union-o-full-outer-joincon-intersección-y-sin-intersección)
+  - [2.3.6. ***`UNION ALL`***](#236-union-all)
+    - [2.3.6.1. **¿Para qué se usa `UNION ALL`?**](#2361-para-qué-se-usa-union-all)
+    - [2.3.6.1. ***Ejm: `UNION ALL`***](#2361-ejm-union-all)
+  - [2.3.7. ***Ejm: `JOINS` con alias `AS`***](#237-ejm-joins-con-alias-as)
 - [2.4. **Tercera parte: `WHERE`**](#24-tercera-parte-where)
   - [2.4.1. ***`WHERE` -\> Operadores de comparación (`=`, `>`, `<`, `>=`, `<=`, `!=`, `<>`) para filtrar a partir de cierto `numero` o `string`***](#241-where---operadores-de-comparación--------para-filtrar-a-partir-de-cierto-numero-o-string)
   - [2.4.2. ***`WHERE` -\> Operador `LIKE` para filtrar a partir de cierto texto***](#242-where---operador-like-para-filtrar-a-partir-de-cierto-texto)
@@ -47,9 +50,10 @@
 - [2.8. **\_\_Secuencia auxiliar `HAVING`**](#28-__secuencia-auxiliar-having)
   - [2.8.1. ***Caso de ejemplo en el que se usa `HAVING`***](#281-caso-de-ejemplo-en-el-que-se-usa-having)
 - [**\_\_Ejercicio de ejemplo de query utilizando toda la estructura de una consulta SQL**](#__ejercicio-de-ejemplo-de-query-utilizando-toda-la-estructura-de-una-consulta-sql)
-- [4. **El interminable agujero de conejo (`Nested queries`)**](#4-el-interminable-agujero-de-conejo-nested-queries)
+- [4. **`Nested queries` El interminable agujero de conejo**](#4-nested-queries-el-interminable-agujero-de-conejo)
   - [4.1. ***Recomendaciones al utilizar los `Nested queries`***](#41-recomendaciones-al-utilizar-los-nested-queries)
   - [4.2. ***Ejemplos de `Nested queries`***](#42-ejemplos-de-nested-queries)
+  - [4.3. **Uso de `Nested queries` para insertar datos en una tabla pivote usando `UNION ALL` y `JOIN`**](#43-uso-de-nested-queries-para-insertar-datos-en-una-tabla-pivote-usando-union-all-y-join)
 - [5. **¿Como convertir una pregunta en una consulta SQL?**](#5-como-convertir-una-pregunta-en-una-consulta-sql)
   - [5.1. ***Preguntandole a la base de datos***](#51-preguntandole-a-la-base-de-datos)
 - [6. **Función `GROUP CONCAT`**](#6-función-group-concat)
@@ -207,12 +211,13 @@ La segunda parte de una consulta es `FROM`, que se encarga de seleccionar la tab
 | **`RIGHT JOIN`** | **(Sin la intersección) <br> Trae todos los datos de la tabla B, que no estén de la tabla A.** | **Diferencia** |
 | **`INNER JOIN`** | **Solo arrastra valores que estén tanto en la Tabla A como en la Tabla B.** | **Intersección** |
 | **`UNION`** | **Trae todos los datos de la tabla A y de la tabla B.** | **Unión Simétrica** |
+| **`UNION ALL`** | **Trae todos los datos de la tabla A y de la tabla B, pero sin repetir los datos.** | **Unión Simétrica** |
 | **`FULL JOIN`** | **Trae todos los datos de la tabla A y de la tabla B, pero solo información que no guarde relación una tabla con la otra.** | **Diferencia Simétrica** |
 
 </div>
 
 
-## 2.2.1. ***La forma correcta de entender la estructura de una sentencia `JOIN`***
+## 2.3.1. ***La forma correcta de entender la estructura de una sentencia `JOIN`***
 
 ```sql
 SELECT *
@@ -224,7 +229,7 @@ JOIN tabla2 ON tabla1.id = tabla2.id_table1;
 >
 > En la estructura de la consulta de los JOIN luego de la sentencia `ON` se coloca el campo que relaciona las tablas. **En este caso `tabla1.id = tabla2.id`**. Teniendo en cuenta que la tabla `tabla1` tiene un campo `id` y la tabla `tabla2` tiene un campo `id_table1` que es el que relaciona las tablas.
 
-## 2.2.2. ***Ejm: `LEFT JOIN` con intersección y sin intersección***
+## 2.3.2. ***Ejm: `LEFT JOIN` con intersección y sin intersección***
 
 **`LEFT JOIN` con intersección**
 
@@ -270,7 +275,7 @@ RIGHT JOIN posts ON usuarios.id = posts.user_id
 WHERE usuarios.id IS NULL;
 ```
 
-## 2.2.4. ***Ejm: `INNER JOIN`***
+## 2.3.4. ***Ejm: `INNER JOIN`***
 
 - Consultar todos los post que sí hayan hecho posts, con su respectivo post
 
@@ -280,7 +285,7 @@ FROM usuarios
 INNER JOIN posts ON usuarios.id = posts.user_id;
 ```
 
-## 2.2.5. ***Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección***
+## 2.3.5. ***Ejm: `UNION` o `FULL OUTER JOIN`con intersección y sin intersección***
 
 **`UNION` con intersección**
 
@@ -318,7 +323,40 @@ FROM usuarios
 FULL OUTER JOIN posts ON usuarios.id = posts.user_id
 WHERE usuarios.id IS NULL OR posts.user_id IS NULL;
 ```
-## 2.3.6. ***Ejm: `JOINS` con alias `AS`***
+
+
+## 2.3.6. ***`UNION ALL`***
+
+**Se utiliza para combinar los resultados de dos o más consultas `SELECT` en un solo conjunto de resultados.** 
+
+> [!IMPORTANT]
+> 
+> A diferencia de `UNION`, **`UNION ALL` no elimina los duplicados, lo que puede hacer que sea más rápido** ya que no requiere la operación adicional de eliminación de duplicados.
+
+### 2.3.6.1. **¿Para qué se usa `UNION ALL`?**
+
+- **Combinar Resultados de Múltiples Consultas:** Se usa para combinar los resultados de varias consultas `SELECT` en un solo conjunto de resultados. **(En los casos que usan `Nested queries`)**
+
+- **Mantener Duplicados:** Si necesitas mantener los duplicados en el conjunto de resultados, `UNION ALL` es la opción adecuada.
+
+- **Mejor Rendimiento:** **Es más rápido que `UNION` porque no realiza la operación de eliminación de duplicados**.
+
+### 2.3.6.1. ***Ejm: `UNION ALL`***
+
+- Consultar todos los usuarios que hayan hecho posts y los que no
+
+```sql
+SELECT *
+FROM usuarios
+LEFT JOIN posts ON usuarios.id = posts.user_id
+UNION ALL
+SELECT *
+FROM usuarios
+RIGHT JOIN posts ON usuarios.id = posts.user_id;
+```
+
+
+## 2.3.7. ***Ejm: `JOINS` con alias `AS`***
 
 - En este ejemplo se consulta los cursos con su respectivo profesor trayendo los campos (`courses.id`, `courses.name`, `courses.teacher_id`, `teachers.name`) de las tablas `courses` y `teachers` respectivamente.
 
@@ -332,6 +370,7 @@ FROM courses
 LEFT JOIN teachers ON courses.teacher_id = teachers.id
 WHERE courses.teacher_id IS NOT NULL;
 ```
+
 
 # 2.4. **Tercera parte: `WHERE`**
 
@@ -744,7 +783,7 @@ HAVING total_reviews > 0 -- Ningun profesor debe tener 0 reviews debe tener al m
 ORDER BY total_reviews DESC;
 ```
 
-# 4. **El interminable agujero de conejo (`Nested queries`)**
+# 4. **`Nested queries` El interminable agujero de conejo**
 
 - **`Nested queries`** o **`subconsultas`** son consultas dentro de otras consultas. **Se usan para hacer consultas más complejas y para hacer consultas que involucran más de una tabla.**
 
@@ -795,6 +834,54 @@ WHERE fecha_publicacion = (
     FROM posts
 );
 ```
+
+## 4.3. **Uso de `Nested queries` para insertar datos en una tabla pivote usando `UNION ALL` y `JOIN`** 
+
+1. Teniendo una tabla llamada **lineas** y otra tabla llamada **estaciones** se establece una relación de muchos a muchos por lo que es necesario crear una tabla pivote para relacionar ambas tablas bajo el nombre de **linea_estaciones**
+
+```sql
+CREATE TABLE `linea_estaciones` (
+  `id` BIGINT(20) NOT NULL,
+  `linea_id` BIGINT(20) NOT NULL,
+  `estacion_id` BIGINT(20) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `linea_estaciones_linea_id_foreign`
+  FOREIGN KEY (`linea_id`) REFERENCES `lineas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `linea_estaciones_estacion_id_foreign`
+  FOREIGN KEY (`estacion_id`) REFERENCES `estaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+```
+
+Pero ahora para insertar datos en esta tabla pivote se puede hacer uso de `Nested queries` para traer los `id` de las tablas `lineas` y `estaciones` y luego insertarlos en la tabla pivote.
+
+```sql
+INSERT INTO `linea_estaciones` (`id`, `linea_id`, `estacion_id`)
+SELECT
+    tempo.id,
+    l.id AS linea_id,
+    s.id AS estacion_id
+FROM (
+    SELECT 1 AS id, 'Linea 1' AS line_name, 'Estacion 1' AS station_name
+    UNION ALL
+    SELECT 2, 'Linea 2', 'Estacion 2'
+    UNION ALL
+    SELECT 3, 'Linea 3', 'Estacion 3'
+    UNION ALL
+    SELECT 4, 'Linea 1', 'Estacion 4'
+    UNION ALL
+    SELECT 5, 'Linea 2', 'Estacion 5'
+) AS tempo
+INNER JOIN lineas l ON l.nombre = tempo.line_name
+INNER JOIN estaciones s ON s.nombre = tempo.station_name;
+```
+
+- En este caso se hace uso de:
+  - **`tempo`** que es una tabla temporal que se crea a partir de una subconsulta usando `UNION ALL` para unir los datos de las tablas `lineas` y `estaciones`.
+  - **`INNER JOIN`** se usa para unir las tablas `lineas` y `estaciones` con la tabla temporal `tempo` y obtener los `id` de las tablas `lineas` y `estaciones` para insertarlos en la tabla pivote `linea_estaciones`.
+
 
 # 5. **¿Como convertir una pregunta en una consulta SQL?**
 

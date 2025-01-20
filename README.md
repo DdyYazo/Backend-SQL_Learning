@@ -26,3 +26,15 @@
 > 
 > - In addition, for view models **you will download the plugin of `Draw.io Integration` in your IDE.**
 
+
+> [!TIP]
+>
+> Ahora es probable que al momento de iniciar con un proyecto te enfrentes a la pregunta ¿qué tipo de base de datos debo elegir?.
+> 
+> El teorema CAP te ayuda a tomar en cuenta 3 factores clave:
+> - Consistencia.
+> - Disponibilidad.
+> - Tolerancia a la partición.
+> 
+> En este blogpost podrás conocer más detalles para tomar la mejor decisión.
+
